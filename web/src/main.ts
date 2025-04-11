@@ -1,6 +1,96 @@
 import "./style.css";
 import $ from "cash-dom";
-// import { slider } from "./slider";
+
+interface XYZ {
+  x: number;
+  y: number;
+  z: number;
+}
+
+interface _10dofData {
+  centre: XYZ;
+  acceleration: XYZ;
+  gyro: XYZ;
+  compass: XYZ;
+  heading: number;
+  tiltheading: number;
+  temperature: number;
+  pressure: number;
+  atmospheres: number;
+  altitude: number;
+}
+
+function empty10dofData(): _10dofData {
+  return {
+    centre: {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+    acceleration: {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+    gyro: {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+    compass: {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+    heading: 0,
+    tiltheading: 0,
+    temperature: 0,
+    pressure: 0,
+    atmospheres: 0,
+    altitude: 0,
+  };
+}
+
+async function update10dof() {
+  let data: _10dofData = empty10dofData();
+
+  try {
+    let response = await fetch("/10dof");
+    let responseBody = await response.text();
+    let dataPoints = responseBody.split("\n");
+
+    data.centre.x = Number(dataPoints[0]);
+    data.centre.y = Number(dataPoints[1]);
+    data.centre.z = Number(dataPoints[2]);
+
+    data.acceleration.x = Number(dataPoints[3]);
+    data.acceleration.y = Number(dataPoints[4]);
+    data.acceleration.z = Number(dataPoints[5]);
+
+    data.gyro.x = Number(dataPoints[6]);
+    data.gyro.y = Number(dataPoints[7]);
+    data.gyro.z = Number(dataPoints[8]);
+
+    data.compass.x = Number(dataPoints[9]);
+    data.compass.y = Number(dataPoints[10]);
+    data.compass.z = Number(dataPoints[11]);
+
+    data.heading = Number(dataPoints[12]);
+    data.tiltheading = Number(dataPoints[13]);
+    data.temperature = Number(dataPoints[14]);
+    data.pressure = Number(dataPoints[15]);
+    data.atmospheres = Number(dataPoints[16]);
+    data.altitude = Number(dataPoints[17]);
+  } catch {}
+
+  $("#compass-x").text(data.compass.x.toString());
+  $("#compass-y").text(data.compass.y.toString());
+  $("#compass-z").text(data.compass.z.toString());
+}
+
+setInterval(() => {
+  update10dof();
+}, 100);
 
 let CMD_STOP = 0;
 let CMD_FORWARD = 1;
@@ -170,19 +260,21 @@ $wsButton.on("click", () => {
 $aiSlider.on("input", () => {
   switch ($aiSlider.val() as string) {
     case "0":
-      $aiInfo.text("no ai")
+      $aiInfo.text("no ai");
       break;
     case "1":
-      $aiInfo.text("elon musk self driving")
+      $aiInfo.text("elon musk self driving");
       break;
     case "2":
-      $aiInfo.text("openai self driving")
+      $aiInfo.text("openai self driving");
       break;
     case "3":
-      $aiInfo.text("Autonomous Intelligent Adaptive Machine Learning System for Enhanced Predictive Analytics and Real-Time Decision-Making in Dynamic Environments (self driving)")
+      $aiInfo.text(
+        "Autonomous Intelligent Adaptive Machine Learning System for Enhanced Predictive Analytics and Real-Time Decision-Making in Dynamic Environments (self driving)",
+      );
       break;
   }
-})
+});
 
 $up.on("mousedown", up);
 $left.on("mousedown", left);

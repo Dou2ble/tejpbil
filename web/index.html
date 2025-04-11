@@ -1,49 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="src/style.css">
-        <script type="module" src="src/main.ts" defer></script>
-        <title>Document</title>
-    </head>
-    <body>
-
-  <div id="login-container">
-    <div>
-      <input type="password" id="password" />
-      <button id="login">Login</button>
-    </div>
-    <div id="error-message"></div>
-  </div>
-
-  <div id="interface" style="display: none">
-    <marquee behavior="scroll" direction="left" scrollamount="10">© 2024 Otto Roming</marquee>
-    <h1>Otto's interface</h1>
-    <div class="center">
-      <div id="button-container">
-        <div class="direction-button" id="up"></div>
-        <div></div>
-        <div class="direction-button" id="left"></div>
-        <div></div>
-        <div class="direction-button" id="down"></div>
-        <div class="direction-button" id="right"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css" />
+    <script type="module" src="src/main.ts" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="login-container">
+      <div>
+        <input type="password" id="password" />
+        <button id="login">Login</button>
       </div>
+      <div id="error-message"></div>
     </div>
-    <p id="ws-status-container">
-      Last sent command: <strong id="last-command">none</strong><br />
-      WebSocket: <strong id="ws-status">closed</strong><br />
-    </p>
-    <div>
-      <div id="ai-info">no ai</div>
-      <input id="ai-slider" type="range" min="0" max="3" value="0">
-    </div>
-    <br>
-    <!-- <input type="text" placeholder="192.168.1.2" id="ws-ip-input"> -->
-    <button id="ws-button">connect</button>
-    <br />
-    <button id="stop">stop</button>
-  </div>
-</body>
 
+    <div id="interface" style="display: none">
+      <marquee behavior="scroll" direction="left" scrollamount="10">
+        © 2024 Otto Roming
+      </marquee>
+      <h1>Otto's interface</h1>
+      <aside id="_10dof">
+        <h2>Updates 10 times per second</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Measurement</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>compass x</th>
+              <td id="compass-x"></td>
+            </tr>
+            <tr>
+              <th>compass y</th>
+              <td id="compass-y"></td>
+            </tr>
+            <tr>
+              <th>compass z</th>
+              <td id="compass-z"></td>
+            </tr>
+          </tbody>
+        </table>
+      </aside>
+      <div class="center">
+        <div id="button-container">
+          <div class="direction-button" id="up"></div>
+          <div></div>
+          <div class="direction-button" id="left"></div>
+          <div></div>
+          <div class="direction-button" id="down"></div>
+          <div class="direction-button" id="right"></div>
+        </div>
+      </div>
+      <p id="ws-status-container">
+        Last sent command: <strong id="last-command">none</strong><br />
+        WebSocket: <strong id="ws-status">closed</strong><br />
+      </p>
+      <div>
+        <div id="ai-info">no ai</div>
+        <input id="ai-slider" type="range" min="0" max="3" value="0" />
+      </div>
+      <br />
+      <!-- <input type="text" placeholder="192.168.1.2" id="ws-ip-input"> -->
+      <button id="ws-button">connect</button>
+      <br />
+      <button id="stop">stop</button>
+    </div>
+  </body>
 </html>

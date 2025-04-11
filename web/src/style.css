@@ -1,121 +1,127 @@
 @use "@material/slider/styles";
 
 :root {
-    --button-size: 100px;
+  --button-size: 100px;
 }
 
 body {
-    background-color: #181819;
-    color: #e2e2e3;
-    text-align: center;
-    font-family: monospace;
-    font-size: 200%;
+  background-color: #181819;
+  color: #e2e2e3;
+  text-align: center;
+  font-family: monospace;
+  font-size: 200%;
 }
 
 h1 {
-    font-size: 80px;
-    /* font-family: sans-serif; */
+  font-size: 80px;
+  /* font-family: sans-serif; */
 }
 
 input,
 button {
-    background-color: transparent;
-    border-color: #e2e2e2;
-    border-style: solid;
-    border-radius: 6px;
-    color: white;
+  background-color: transparent;
+  border-color: #e2e2e2;
+  border-style: solid;
+  border-radius: 6px;
+  color: white;
 }
 
 #login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
 }
 
 #password,
 #password {
-    margin: 8px;
+  margin: 8px;
 }
 
 #error-message {
-    color: #fc5d7c;
+  color: #fc5d7c;
 }
 
 button:hover {
-    background-color: #ffffff30;
+  background-color: #ffffff30;
 }
 
 button:active {
-    background-color: #ffffff40;
+  background-color: #ffffff40;
 }
 
 .rocquet-league {
-    border-radius: 12px;
-    margin: 64px;
-    margin-top: 10000px;
+  border-radius: 12px;
+  margin: 64px;
+  margin-top: 10000px;
 }
 
 #ws-status-container {
-    margin-top: 64px;
+  margin-top: 64px;
+}
+
+#interface {
+  position: relative;
+}
+
+#_10dof {
+  position: absolute;
+  left: 12px;
 }
 
 .center {
-    display: flex;
-    justify-content: center;
-    /* justify-content: center; Center horizontally */
-    /* // align-items: center; Center vertically */
-    /* // height: 100vh; Full viewport height */
+  display: flex;
+  justify-content: center;
 }
 
 #button-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, var(--button-size));
-    gap: 10px;
-    justify-items: center;
-    width: calc(var(--button-size) * 3);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, var(--button-size));
+  gap: 10px;
+  justify-items: center;
+  width: calc(var(--button-size) * 3);
 
-    margin-top: 100px;
-    margin-left: -20px;
+  margin-top: 100px;
+  margin-left: -20px;
 }
 
 .direction-button {
-    width: 100px;
-    height: 100px;
-    background-color: #ffffff10;
-    border-radius: 6px;
+  width: 100px;
+  height: 100px;
+  background-color: #ffffff10;
+  border-radius: 6px;
 }
 
 @keyframes active-animation {
-    0% {
-        background-color: #ffffffff;
-    }
+  0% {
+    background-color: #ffffffff;
+  }
 
-    100% {
-        background-color: #ffffff50;
-    }
+  100% {
+    background-color: #ffffff50;
+  }
 }
 
 .active {
-    background-color: #ffffff50;
-    animation-name: active-animation;
-    animation-duration: 500ms;
+  background-color: #ffffff50;
+  animation-name: active-animation;
+  animation-duration: 500ms;
 }
 
 #up {
-    grid-column-start: 2;
+  grid-column-start: 2;
 }
 
 #left {
-    grid-row-start: 2;
+  grid-row-start: 2;
 }
 
 #down {
-    grid-row-start: 2;
+  grid-row-start: 2;
 }
 
 #right {
-    grid-row-start: 2;
+  grid-row-start: 2;
 }
