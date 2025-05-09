@@ -138,7 +138,7 @@ async function update10dof() {
   $("#gyro-y").text(data.gyro.y.toString());
   $("#gyro-z").text(data.gyro.z.toString());
 
-  if (updateCounter % 100 == 0) {
+  if (updateCounter % 100 == 0 && aiSliderValue >= 2) {
     askTeachGPT(data);
   }
   updateCounter++;
@@ -173,6 +173,8 @@ let $errorMessage = $("#error-message");
 
 let $aiSlider = $("#ai-slider");
 let $aiInfo = $("#ai-info");
+
+let aiSliderValue = 0;
 
 // slider($("#slider"));
 
@@ -314,6 +316,8 @@ $wsButton.on("click", () => {
 });
 
 $aiSlider.on("input", () => {
+  aiSliderValue = parseInt($aiSlider.val() as string);
+  updateCounter = 0;
   switch ($aiSlider.val() as string) {
     case "0":
       $aiInfo.text("no ai");
