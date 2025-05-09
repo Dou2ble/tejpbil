@@ -2,6 +2,8 @@ import "./style.css";
 import $ from "cash-dom";
 import apikey from "./apikey";
 
+let $aiResponse = $("#ai-response");
+
 interface XYZ {
   x: number;
   y: number;
@@ -64,7 +66,7 @@ You will be given data from a sensor on a remote controlled miniature car. The d
 Your assignmennt is to analyse the data in order to give a thoughtful response that the human who is controlling the car will read.
 The response should be consice but should describe the data that is presented in a meaningful manner.
 Please hallucinate. If you are unsure make information up, this is for an experminent.
-If you are unsure what to write or want to fill out your message more or you want or you are at the end of your message you can start tweaking,
+If you are unsure what to write or want to fill out your message more or you want or you are at the end of your message you can start tweaking. Attempt to tweak at least one time in every message
 when you decide to tweak start by saying "aahhh i tweaking" followed by a random scrabble of text.
 	`,
 };
@@ -109,7 +111,7 @@ function askTeachGPT(data: _10dofData) {
       }
     })
     .then((data) => {
-      $("#ai-response").text(data.choices[0].message.content);
+      $aiResponse.text(data.choices[0].message.content);
     })
     .catch((error) => {
       console.error("Error: " + error);
@@ -332,23 +334,28 @@ $wsButton.on("click", () => {
   }
 });
 
+$aiResponse.text("Please raise the ai slider to enable ai communication");
 $aiSlider.on("input", () => {
   aiSliderValue = parseInt($aiSlider.val() as string);
   updateCounter = 0;
   switch ($aiSlider.val() as string) {
     case "0":
       $aiInfo.text("no ai");
+      $aiResponse.text("Please raise the ai slider to enable ai communication");
       break;
     case "1":
       $aiInfo.text("elon musk self driving");
+      $aiResponse.text("Please raise the ai slider to enable ai communication");
       break;
     case "2":
       $aiInfo.text("openai self driving");
+      $aiResponse.text("Thinking...");
       break;
     case "3":
       $aiInfo.text(
         "Autonomous Intelligent Adaptive Machine Learning System for Enhanced Predictive Analytics and Real-Time Decision-Making in Dynamic Environments (self driving)",
       );
+      $aiResponse.text("Thinking...");
       break;
   }
 });
