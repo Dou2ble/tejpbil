@@ -3,6 +3,26 @@ import $ from "cash-dom";
 import apikey from "./apikey";
 
 let $aiResponse = $("#ai-response");
+let $cameraIP = $("#camera-ip");
+let $cameraDisplay = $("#camera-display");
+
+function isValidIPv4(ip: string): boolean {
+  const ipv4Pattern =
+    /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  return ipv4Pattern.test(ip);
+}
+
+$cameraIP.on("input", () => {
+  let ip = $cameraIP.val() as string;
+  if (!isValidIPv4(ip)) {
+    $cameraIP.addClass("input-error");
+    return;
+  } else {
+    $cameraIP.removeClass("input-error");
+  }
+
+  $cameraDisplay.attr("src", `http://${ip}:81/stream`);
+});
 
 interface XYZ {
   x: number;

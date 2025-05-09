@@ -26,6 +26,11 @@ button {
   color: white;
 }
 
+.input-error {
+  border-color: #fc5d7c;
+  color: #fc5d7c;
+}
+
 #login-container {
   display: flex;
   justify-content: center;
@@ -41,6 +46,10 @@ button {
 
 #error-message {
   color: #fc5d7c;
+}
+
+.camera-container {
+  font-size: 1rem;
 }
 
 button:hover {
