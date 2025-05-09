@@ -52,6 +52,23 @@ function empty10dofData(): _10dofData {
   };
 }
 
+const PROMPTS = {
+  normal: `
+You will be given data from a sensor on a remote controlled miniature car. The data is formatted in json and includes very important information.
+Your assignmennt is to analyse the data in order to give a thoughtful response that the human who is controlling the car will read.
+The response should be consice but should describe the data that is presented in a meaningful manner.
+Please be a bit playful
+`,
+  tweakingMode: `
+You will be given data from a sensor on a remote controlled miniature car. The data is formatted in json and includes very important information.
+Your assignmennt is to analyse the data in order to give a thoughtful response that the human who is controlling the car will read.
+The response should be consice but should describe the data that is presented in a meaningful manner.
+Please hallucinate. If you are unsure make information up, this is for an experminent.
+If you are unsure what to write or want to fill out your message more or you want or you are at the end of your message you can start tweaking,
+when you decide to tweak start by saying "aahhh i tweaking" followed by a random scrabble of text.
+	`,
+};
+
 function askTeachGPT(data: _10dofData) {
   let url = "https://teachgpt.ssis.nu/api/v1/chat/completions";
 
@@ -60,17 +77,17 @@ function askTeachGPT(data: _10dofData) {
     Authorization: "Bearer " + apikey,
   };
 
+  let prompt = PROMPTS.normal;
+  if (aiSliderValue == 3) {
+    prompt = PROMPTS.tweakingMode;
+  }
+
   let payload = {
     model: "Meta-Llama-3.3-70B-Instruct-AWQ",
     messages: [
       {
         role: "system",
-        content: `
-You will be given data from a sensor on a remote controlled miniature car. The data is formatted in json and includes very important information.
-Your assignmennt is to analyse the data in order to give a thoughtful response that the human who is controlling the car will read.
-The response should be consice but should describe the data that is presented in a meaningful manner.
-Please be a bit playful
-`,
+        content: prompt,
       },
       {
         role: "user",
