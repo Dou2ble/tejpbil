@@ -1,5 +1,6 @@
 import "./style.css";
 import $ from "cash-dom";
+import apikey from "./apikey";
 
 interface XYZ {
   x: number;
@@ -51,6 +52,54 @@ function empty10dofData(): _10dofData {
   };
 }
 
+function askTeachGPT(data: _10dofData) {
+  let url = "https://teachgpt.ssis.nu/api/v1/chat/completions";
+
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + apikey,
+  };
+
+  let payload = {
+    model: "Meta-Llama-3.3-70B-Instruct-AWQ",
+    messages: [
+      {
+        role: "system",
+        content: `
+You will be given data from a sensor on a remote controlled miniature car. The data is formatted in json and includes very important information.
+Your assignmennt is to analyse the data in order to give a thoughtful response that the human who is controlling the car will read.
+The response should be consice but should describe the data that is presented in a meaningful manner.
+Please be a bit playful
+`,
+      },
+      {
+        role: "user",
+        content: JSON.stringify(data),
+      },
+    ],
+  };
+
+  fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Error: " + response.statusText);
+      }
+    })
+    .then((data) => {
+      $("#ai-response").text(data.choices[0].message.content);
+    })
+    .catch((error) => {
+      console.error("Error: " + error);
+    });
+}
+
+let updateCounter = 0;
 async function update10dof() {
   let data: _10dofData = empty10dofData();
 
@@ -83,9 +132,16 @@ async function update10dof() {
     data.altitude = Number(dataPoints[17]);
   } catch {}
 
-  $("#compass-x").text(data.compass.x.toString());
-  $("#compass-y").text(data.compass.y.toString());
-  $("#compass-z").text(data.compass.z.toString());
+  console.log(data);
+
+  $("#gyro-x").text(data.gyro.x.toString());
+  $("#gyro-y").text(data.gyro.y.toString());
+  $("#gyro-z").text(data.gyro.z.toString());
+
+  if (updateCounter % 100 == 0) {
+    askTeachGPT(data);
+  }
+  updateCounter++;
 }
 
 setInterval(() => {

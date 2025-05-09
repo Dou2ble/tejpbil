@@ -65,14 +65,27 @@ button:active {
   position: relative;
 }
 
-#_10dof {
-  position: absolute;
-  left: 12px;
+.main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 
 .center {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 #button-container {
@@ -80,11 +93,7 @@ button:active {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, var(--button-size));
   gap: 10px;
-  justify-items: center;
   width: calc(var(--button-size) * 3);
-
-  margin-top: 100px;
-  margin-left: -20px;
 }
 
 .direction-button {
@@ -124,4 +133,31 @@ button:active {
 
 #right {
   grid-row-start: 2;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+th,
+td {
+  border: 1px solid #ffffff; /* White border */
+  padding: 10px;
+}
+
+th {
+  background-color: #1e1e1e; /* Darker background for headers */
+}
+
+tr:nth-child(even) {
+  background-color: #1f1f1f; /* Slightly lighter dark for even rows */
+}
+
+tr:nth-child(odd) {
+  background-color: #2a2a2a; /* Slightly darker for odd rows */
+}
+
+tr:hover {
+  background-color: #333333; /* Highlight on hover */
 }

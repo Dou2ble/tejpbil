@@ -21,40 +21,55 @@
         © 2024 Otto Roming
       </marquee>
       <h1>Otto's interface</h1>
-      <aside id="_10dof">
-        <h2>Updates 10 times per second</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Measurement</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>compass x</th>
-              <td id="compass-x"></td>
-            </tr>
-            <tr>
-              <th>compass y</th>
-              <td id="compass-y"></td>
-            </tr>
-            <tr>
-              <th>compass z</th>
-              <td id="compass-z"></td>
-            </tr>
-          </tbody>
-        </table>
-      </aside>
-      <div class="center">
-        <div id="button-container">
-          <div class="direction-button" id="up"></div>
-          <div></div>
-          <div class="direction-button" id="left"></div>
-          <div></div>
-          <div class="direction-button" id="down"></div>
-          <div class="direction-button" id="right"></div>
+      <div class="main">
+        <aside id="_10dof" class="center">
+          <table>
+            <thead>
+              <tr>
+                <th>Measurement</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>gyro x</th>
+                <td id="gyro-x"></td>
+              </tr>
+              <tr>
+                <th>gyro y</th>
+                <td id="gyro-y"></td>
+              </tr>
+              <tr>
+                <th>gyro z</th>
+                <td id="gyro-z"></td>
+              </tr>
+            </tbody>
+          </table>
+        </aside>
+        <div class="center">
+          <div id="button-container">
+            <div class="direction-button" id="up"></div>
+            <div></div>
+            <div class="direction-button" id="left"></div>
+            <div></div>
+            <div class="direction-button" id="down"></div>
+            <div class="direction-button" id="right"></div>
+          </div>
         </div>
+        <aside class="center">
+          <table>
+            <thead>
+              <tr>
+                <th>ai response</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="ai-response"></td>
+              </tr>
+            </tbody>
+          </table>
+        </aside>
       </div>
       <p id="ws-status-container">
         Last sent command: <strong id="last-command">none</strong><br />
