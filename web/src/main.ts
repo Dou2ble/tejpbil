@@ -79,7 +79,11 @@ const PROMPTS = {
 You will be given data from a sensor on a remote controlled miniature car. The data is formatted in json and includes very important information.
 Your assignmennt is to analyse the data in order to give a thoughtful response that the human who is controlling the car will read.
 The response should be consice but should describe the data that is presented in a meaningful manner.
-Please be a bit playful
+Please be a bit playful.
+
+Remember that most of the values are ranges from 0 to around 360. So don't get to worked up about small values
+
+Don't hallucinate, provide good answers
 `,
   tweakingMode: `
 You will be given data from a sensor on a remote controlled miniature car. The data is formatted in json and includes very important information.
@@ -183,8 +187,20 @@ async function update10dof() {
   updateCounter++;
 }
 
+async function updateGPS() {
+  let response = await fetch("/gps");
+  let data: { x: number; y: number; z: number } = (await response.json())[0];
+  $pin.css(
+    "left",
+    `${(data.x + 40.1925663716) * 3.58275206088 + -545.066296767}px`,
+  );
+
+  $pin.css("bottom", `${(data.y - 9.14875) * 3.29444063143}px`);
+}
+
 setInterval(() => {
   update10dof();
+  updateGPS();
 }, 100);
 
 let CMD_STOP = 0;
@@ -212,6 +228,7 @@ let $errorMessage = $("#error-message");
 
 let $aiSlider = $("#ai-slider");
 let $aiInfo = $("#ai-info");
+let $pin = $("#pin");
 
 let aiSliderValue = 0;
 
@@ -355,27 +372,31 @@ $wsButton.on("click", () => {
 });
 
 $aiResponse.text("Please raise the ai slider to enable ai communication");
-$aiSlider.on("input", () => {
+$aiSlider.on("input", async () => {
   aiSliderValue = parseInt($aiSlider.val() as string);
   updateCounter = 0;
   switch ($aiSlider.val() as string) {
     case "0":
       $aiInfo.text("no ai");
       $aiResponse.text("Please raise the ai slider to enable ai communication");
+      await fetch("/disable-self-driving");
       break;
     case "1":
       $aiInfo.text("elon musk self driving");
       $aiResponse.text("Please raise the ai slider to enable ai communication");
+      await fetch("/enable-self-driving");
       break;
     case "2":
       $aiInfo.text("openai self driving");
       $aiResponse.text("Thinking...");
+      await fetch("/enable-self-driving");
       break;
     case "3":
       $aiInfo.text(
         "Autonomous Intelligent Adaptive Machine Learning System for Enhanced Predictive Analytics and Real-Time Decision-Making in Dynamic Environments (self driving)",
       );
       $aiResponse.text("Thinking...");
+      await fetch("/enable-self-driving");
       break;
   }
 });
