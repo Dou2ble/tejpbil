@@ -35,4 +35,4 @@ python3 build.py
 
 ### Färdig
 
-nu borde en index.h fil ha skapats som behöver användas för att kompilera c koden till arduinon
+nu borde en index.h fil ha skapats som behöver användas för att kompilera c koden till arduinon. Lösenordet för att komma in på hemsidan för arduinon är "tejpbil123".

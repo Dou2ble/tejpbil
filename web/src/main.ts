@@ -192,7 +192,7 @@ async function updateGPS() {
   let data: { x: number; y: number; z: number } = (await response.json())[0];
   $pin.css(
     "left",
-    `${(data.x + 40.1925663716) * 3.58275206088 + -545.066296767}px`,
+    `${(data.x + 40.1925663716) * 3.58275206088 + 545.066296767}px`,
   );
 
   $pin.css("bottom", `${(data.y - 9.14875) * 3.29444063143}px`);
